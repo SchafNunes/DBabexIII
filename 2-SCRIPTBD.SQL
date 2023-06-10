@@ -142,3 +142,11 @@ REFERENCES dbadeec.certificado (cd_certificado);
 
 ALTER TABLE dbadeec.certificado ADD CONSTRAINT fk_certificado_cd_usuario FOREIGN KEY (cd_usuario)
 REFERENCES dbadeec.usuarios (cd_usuario);
+
+
+CREATE SEQUENCE seq_cd_usuario
+    INCREMENT 1
+    START 1
+    MINVALUE 1
+    CYCLE;
+
