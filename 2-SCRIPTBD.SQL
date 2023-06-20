@@ -94,7 +94,7 @@ CREATE TABLE dbadeec.localizacao (
     CONSTRAINT pk_localizacao PRIMARY KEY (cd_localizacao)
 );
 
-CREATE drop TABLE dbadeec.certificado (
+CREATE TABLE dbadeec.certificado (
     cd_certificado INT,
     cd_demanda INT,
     cd_usuario INT,
@@ -138,8 +138,8 @@ REFERENCES dbadeec.inscricao_demanda (cd_inscricao_demanda);
 ALTER TABLE dbadeec.demanda ADD CONSTRAINT fk_demanda_cd_localizacao FOREIGN KEY (cd_localizacao)
 REFERENCES dbadeec.localizacao (cd_localizacao);
 
-ALTER TABLE dbadeec.demanda ADD CONSTRAINT fk_demanda_cd_certificado FOREIGN KEY (cd_certificado)
-REFERENCES dbadeec.certificado (cd_certificado);
+ALTER TABLE dbadeec.certificado ADD CONSTRAINT fk_certificado_cd_demanda FOREIGN KEY(cd_demanda)
+REFERENCES demanda (cd_demanda);
 
 ALTER TABLE dbadeec.certificado ADD CONSTRAINT fk_certificado_cd_usuario FOREIGN KEY (cd_usuario)
 REFERENCES dbadeec.usuarios (cd_usuario);
