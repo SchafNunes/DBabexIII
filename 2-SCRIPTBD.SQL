@@ -94,8 +94,9 @@ CREATE TABLE dbadeec.localizacao (
     CONSTRAINT pk_localizacao PRIMARY KEY (cd_localizacao)
 );
 
-CREATE TABLE dbadeec.certificado (
+CREATE drop TABLE dbadeec.certificado (
     cd_certificado INT,
+    cd_demanda INT,
     cd_usuario INT,
     dt_geracao DATE,
     hr_geracao DATE,
