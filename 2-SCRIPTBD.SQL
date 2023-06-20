@@ -149,4 +149,11 @@ CREATE SEQUENCE seq_cd_usuario
     START 1
     MINVALUE 1
     CYCLE;
+   
+   
+CREATE SEQUENCE seq_cd_demanda
+    INCREMENT 1
+    START 1
+    MINVALUE 1
+    CYCLE;
 
