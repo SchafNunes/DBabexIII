@@ -163,4 +163,8 @@ CREATE SEQUENCE seq_cd_localizacao
     MINVALUE 1
     CYCLE;
   
-
+CREATE SEQUENCE seq_cd_inscricao_demanda
+    INCREMENT 1
+    START 1
+    MINVALUE 1
+    CYCLE;
