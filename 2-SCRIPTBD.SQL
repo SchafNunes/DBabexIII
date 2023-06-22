@@ -8,6 +8,9 @@ DROP TABLE IF EXISTS dbadeec.entrega_atividade CASCADE;
 DROP TABLE IF EXISTS dbadeec.localizacao CASCADE;
 DROP TABLE IF EXISTS dbadeec.certificado CASCADE;
 DROP TABLE IF EXISTS dbadeec.certificado_modelo CASCADE;
+DROP SEQUENCE IF EXISTS dbadeec.seq_cd_demanda CASCADE;
+DROP SEQUENCE IF EXISTS seq_cd_usuario CASCADE;
+DROP SEQUENCE IF EXISTS seq_cd_localizacao CASCADE;
 
 -- Create Tables
 CREATE TABLE dbadeec.usuarios (
@@ -53,7 +56,7 @@ CREATE TABLE dbadeec.inscricao_demanda (
     cd_inscricao_demanda INT,
     cd_usuario INT,
     dt_cadastro DATE,
-    hr_cadastro DATE,
+    hr_cadastro TIME,
     CONSTRAINT pk_inscricao_demanda PRIMARY KEY (cd_inscricao_demanda)
 );
 
@@ -148,7 +151,7 @@ CREATE SEQUENCE seq_cd_usuario
     CYCLE;
    
    
-CREATE SEQUENCE seq_cd_demanda
+CREATE SEQUENCE seq_cd_demanda 
     INCREMENT 1
     START 1
     MINVALUE 1
