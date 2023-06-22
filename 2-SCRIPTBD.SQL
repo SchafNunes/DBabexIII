@@ -40,12 +40,11 @@ CREATE TABLE dbadeec.demanda (
     dt_fim DATE,
     sn_finalizada VARCHAR(2),
     dt_cadastro DATE,
-    hr_cadastro DATE,
+    hr_cadastro TIME,
     dt_fim_inscricao DATE,
     cd_usuario INT,
     cd_imagem oid,
     cd_localizacao INT,
-    cd_certificado INT,
     CONSTRAINT pk_demanda PRIMARY KEY (cd_demanda)
 );
 
@@ -137,9 +136,6 @@ REFERENCES dbadeec.inscricao_demanda (cd_inscricao_demanda);
 
 ALTER TABLE dbadeec.demanda ADD CONSTRAINT fk_demanda_cd_localizacao FOREIGN KEY (cd_localizacao)
 REFERENCES dbadeec.localizacao (cd_localizacao);
-
-ALTER TABLE dbadeec.certificado ADD CONSTRAINT fk_certificado_cd_demanda FOREIGN KEY(cd_demanda)
-REFERENCES demanda (cd_demanda);
 
 ALTER TABLE dbadeec.certificado ADD CONSTRAINT fk_certificado_cd_usuario FOREIGN KEY (cd_usuario)
 REFERENCES dbadeec.usuarios (cd_usuario);
