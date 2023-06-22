@@ -11,6 +11,7 @@ DROP TABLE IF EXISTS dbadeec.certificado_modelo CASCADE;
 DROP SEQUENCE IF EXISTS dbadeec.seq_cd_demanda CASCADE;
 DROP SEQUENCE IF EXISTS seq_cd_usuario CASCADE;
 DROP SEQUENCE IF EXISTS seq_cd_localizacao CASCADE;
+DROP SEQUENCE IF EXISTS seq_cd_inscricao_demanda CASCADE;
 
 -- Create Tables
 CREATE TABLE dbadeec.usuarios (
@@ -57,8 +58,14 @@ CREATE TABLE dbadeec.inscricao_demanda (
     cd_usuario INT,
     dt_cadastro DATE,
     hr_cadastro TIME,
-    CONSTRAINT pk_inscricao_demanda PRIMARY KEY (cd_inscricao_demanda)
+    CONSTRAINT pk_inscricao_demanda PRIMARY KEY (cd_demanda, cd_inscricao_demanda),
+    CONSTRAINT uk_inscricao_demanda_cd_inscricao UNIQUE (cd_inscricao_demanda),
+    CONSTRAINT uk_inscricao_demanda_cd_usuario UNIQUE (cd_usuario),
+    CONSTRAINT fk_inscricao_demanda_demanda
+        FOREIGN KEY (cd_demanda)
+        REFERENCES dbadeec.demanda (cd_demanda)
 );
+
 
 CREATE TABLE dbadeec.atividade (
     cd_demanda INT,
@@ -73,6 +80,7 @@ CREATE TABLE dbadeec.atividade (
 CREATE TABLE dbadeec.entrega_atividade (
     cd_atividade INT,
     cd_entrega_atividade INT,
+    cd_demanda INT,
     cd_inscricao_demanda INT,
     hr_cadastro DATE,
     sn_entregue VARCHAR(1),
@@ -80,8 +88,11 @@ CREATE TABLE dbadeec.entrega_atividade (
     hr_entegra DATE,
     sn_entrega_atraso VARCHAR(1),
     dc_entrega oid,
-    CONSTRAINT pk_entrega_atividade PRIMARY KEY (cd_entrega_atividade)
+    CONSTRAINT pk_entrega_atividade PRIMARY KEY (cd_entrega_atividade),
+    CONSTRAINT fk_entrega_atividade_cd_inscricao_demanda FOREIGN KEY (cd_demanda, cd_inscricao_demanda)
+    REFERENCES dbadeec.inscricao_demanda (cd_demanda, cd_inscricao_demanda)
 );
+
 
 CREATE TABLE dbadeec.localizacao (
     cd_localizacao INT,
@@ -119,9 +130,6 @@ REFERENCES dbadeec.tipo_usuario (cd_tp_usuario);
 ALTER TABLE dbadeec.demanda ADD CONSTRAINT fk_demanda_cd_usuario FOREIGN KEY (cd_usuario)
 REFERENCES dbadeec.usuarios (cd_usuario);
 
-ALTER TABLE dbadeec.inscricao_demanda ADD CONSTRAINT fk_inscricao_demanda_cd_demanda FOREIGN KEY (cd_demanda)
-REFERENCES dbadeec.demanda (cd_demanda);
-
 ALTER TABLE dbadeec.inscricao_demanda ADD CONSTRAINT fk_inscricao_demanda_cd_usuario FOREIGN KEY (cd_usuario)
 REFERENCES dbadeec.usuarios (cd_usuario);
 
@@ -133,9 +141,6 @@ REFERENCES dbadeec.usuarios (cd_usuario);
 
 ALTER TABLE dbadeec.entrega_atividade ADD CONSTRAINT fk_entrega_atividade_cd_atividade FOREIGN KEY (cd_atividade)
 REFERENCES dbadeec.atividade (cd_atividade);
-
-ALTER TABLE dbadeec.entrega_atividade ADD CONSTRAINT fk_entrega_atividade_cd_inscricao_demanda FOREIGN KEY (cd_inscricao_demanda)
-REFERENCES dbadeec.inscricao_demanda (cd_inscricao_demanda);
 
 ALTER TABLE dbadeec.demanda ADD CONSTRAINT fk_demanda_cd_localizacao FOREIGN KEY (cd_localizacao)
 REFERENCES dbadeec.localizacao (cd_localizacao);
