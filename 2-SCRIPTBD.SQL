@@ -24,7 +24,7 @@ CREATE TABLE dbadeec.usuarios (
     cd_tp_usuario INT,
     sn_ativo VARCHAR(200),
     dt_cadastro DATE,
-    hr_cadastro DATE,
+    hr_cadastro TIME,
     CONSTRAINT pk_usuarios PRIMARY KEY (cd_usuario)
 );
 
